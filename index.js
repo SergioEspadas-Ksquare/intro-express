@@ -7,13 +7,14 @@ const HOST_NAME = "localhost";
 const v1 = express.Router();
 
 const userRouter = express.Router();
+const orgRouter = express.Router();
 
 // LIST
 userRouter.get("/", (req, res) => {
   res.send("GET /v1/users");
 });
 
-userRouter.get("/", (req, res) => {
+orgRouter.get("/", (req, res) => {
   res.send("GET /v1/orgs");
 });
 
@@ -22,7 +23,7 @@ userRouter.post("/", (req, res) => {
   res.send("POST v1/users");
 });
 
-userRouter.post("/", (req, res) => {
+orgRouter.post("/", (req, res) => {
   res.send("POST v1/orgs");
 });
 
@@ -33,7 +34,7 @@ userRouter.get("/:id", (req, res) => {
   res.send(`GET /v1/users/${id}`);
 });
 
-userRouter.get("/:orgId", (req, res) => {
+orgRouter.get("/:orgId", (req, res) => {
   const { id } = req.params;
 
   res.send(`GET /v1/orgs/${orgId}`);
@@ -46,7 +47,7 @@ userRouter.put("/:id", (req, res) => {
   res.send(`PUT /v1/users/${id}`);
 });
 
-userRouter.put("/:orgId", (req, res) => {
+orgRouter.put("/:orgId", (req, res) => {
   const { id } = req.params;
 
   res.send(`PUT /v1/orgs/${orgId}`);
@@ -59,7 +60,7 @@ userRouter.delete("/:id", (req, res) => {
   res.send(`DELETE /v1/users/${id}`);
 });
 
-userRouter.delete("/:orgId", (req, res) => {
+orgRouter.delete("/:orgId", (req, res) => {
   const { orgId } = req.params;
 
   res.send(`DELETE /v1/orgs/${orgId}`);
@@ -71,7 +72,7 @@ app.get("/", (req, res) => {
   res.send("Hello World");
 });
 
-v1.use("/orgs", userRouter);
+v1.use("/orgs", orgRouter);
 app.use("/v1", v1);
 app.get("/", (req, res) => {
   res.send("Hello World");
